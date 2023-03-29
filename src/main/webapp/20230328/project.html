@@ -11,11 +11,23 @@ div {position: absolute;}
 }
 #scorearea {
 	position: absolute;	top: 410px;
-	left: 110px;   	
+	left: 245px;   	
 	border : 1px solid #333333;
-	width : 200px; height:20px;
+	width : 180px; height:20px;
+	padding-left:5px;
 }
 #score {
+	position: relative;	left: 30px;   
+	display: inline;	
+}
+#timer1 {
+	position: absolute;	top: 410px;
+	left: 25px; 
+	border : 1px solid #333333;
+	width : 180px; height:20px;
+	padding-left:5px;
+}
+#timer2 {
 	position: relative;	left: 30px;   
 	display: inline;	
 }
@@ -27,37 +39,46 @@ div {position: absolute;}
 	  return num1;
   }
   window.onload=function() {
-		 cm = setInterval(createMode, 2000);
+		 cm = setInterval(createMode, nextRandomInteger(2000));
+		 ti = setInterval(Timer,1000);
 	 }
   let pobox = [];
-  let canWidth=450;
-  let canHeight=400;
+  let canWidth=400;
+  let canHeight=350;
   let boxWid=35;
-  let boxHei=35;
   let cnt=0;
+  let timer=30;
   function popupbox(){
 	  this.body = document.createElement("div")
-	  this.wx = nextRandomInteger(boxWid);
-	  this.wy = nextRandomInteger(boxHei);
-	  this.x = function(){
-		  
-	  };
+	  this.wx = nextRandomInteger(boxWid)+15;
+	  this.x = nextRandomInteger(canWidth);
 	  this.y = nextRandomInteger(canHeight);
 	  this.body.style.position="absolute";
 	  this.body.setAttribute("style","background-color:black");
 	  this.body.style.left = this.x + 'px';
 	  this.body.style.top = this.y + 'px';
 	  this.body.style.width = this.wx +'px';
-	  this.body.style.height = this.wy+'px';
+	  this.body.style.height = this.wx+'px';
 	  let box = this.body;
 	  this.body.onclick = function(){ 
 		  box.remove();
 		  score.innerHTML=++cnt
+		  if(timer<19){
+			  return
+		  }
 	  }
 	  document.body.appendChild(this.body);
   }
   function createMode(){
 	  pobox.push(new popupbox())
+  }
+  function Timer(){
+	  timer2.innerHTML=timer--+"초";
+	  if(timer<19){
+		  clearInterval(cm);
+		  clearInterval(ti);
+		  alert("총 점수:"+cnt+"점")
+	  }
   }
   
   
@@ -66,6 +87,7 @@ div {position: absolute;}
 <body>
 <div id="main"></div>
 <div style="width: 400px">
+<div id="timer1">남은시간 :<div id="timer2"></div></div>
 <div id="scorearea">점수:<div id="score"></div></div>
 	</div>
 </body>
