@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+div {position: absolute;}
+#main {
+	width: 450px;    	    height: 400px;
+	border: 1px solid black;	overflow: hidden;
+}
+#scorearea {
+	position: absolute;	top: 410px;
+	left: 110px;   	
+	border : 1px solid #333333;
+	width : 200px; height:20px;
+}
+#score {
+	position: relative;	left: 30px;   
+	display: inline;	
+}
+</style>
+<script type="text/javascript">
+  function nextRandomInteger(num){
+	  let num1 = Math.random()* num;
+	  num1 = parseInt(num1);
+	  return num1;
+  }
+  window.onload=function() {
+		 cm = setInterval(createMode, 2000);
+	 }
+  let pobox = [];
+  let canWidth=450;
+  let canHeight=400;
+  let boxWid=35;
+  let boxHei=35;
+  let cnt=0;
+  function popupbox(){
+	  this.body = document.createElement("div")
+	  this.wx = nextRandomInteger(boxWid);
+	  this.wy = nextRandomInteger(boxHei);
+	  this.x = function(){
+		  
+	  };
+	  this.y = nextRandomInteger(canHeight);
+	  this.body.style.position="absolute";
+	  this.body.setAttribute("style","background-color:black");
+	  this.body.style.left = this.x + 'px';
+	  this.body.style.top = this.y + 'px';
+	  this.body.style.width = this.wx +'px';
+	  this.body.style.height = this.wy+'px';
+	  let box = this.body;
+	  this.body.onclick = function(){ 
+		  box.remove();
+		  score.innerHTML=++cnt
+	  }
+	  document.body.appendChild(this.body);
+  }
+  function createMode(){
+	  pobox.push(new popupbox())
+  }
+  
+  
+</script>
+</head>
+<body>
+<div id="main"></div>
+<div style="width: 400px">
+<div id="scorearea">점수:<div id="score"></div></div>
+	</div>
+</body>
+</html>

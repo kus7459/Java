@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!-- 값을 입력하여 객체 생성하기 -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+  function CheckWeight(name,height,weight){
+	  this.username=name
+	  this.userheight=height
+	  this.userweight=weight
+	  //(키-100)*0.9-5 ~ (키-100)*0.9+5 
+	  this.minWeight  //정상몸무게 범위 시작
+	  this.maxWeight  //정상몸무게 범위 끝
+	  this.getResult=function(){
+		  this.minWeight = (height-100)*0.9 -5
+		  this.maxWeight = (height-100)*0.9 +5
+		  if(weight<this.minWeight) return this.username+":저체중입니다."
+		  else if(weight>this.maxWeight) return this.username+":과체중입니다."
+		  else return this.username+":정상 몸무게입니다."
+	  }
+  }
+  //CheckWeight.prototype.getresult()
+  let jang = new CheckWeight("장보리",168,62)
+  let park = new CheckWeight("박달재",180,83)
+  document.write(jang+"<br>")
+  document.write(park+"<br>")
+  console.log(jang)
+  console.log(park)
+  document.write(jang.getResult()+"<br>")
+  document.write(park.getResult()+"<br>")
+</script>
+</body>
+</html>

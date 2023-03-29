@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<script type="text/javascript">
+  now = new Date()
+  document.write(`${now}<br>`) // toString() 호출
+  document.write(`${now.toGMTString()}<br>`)//표준시. 영국 시간
+  document.write(`${now.toLocaleString()}<br>`)//지역일시. 지역에 맞는 형식 출력
+  document.write(`${now.toString()}<br>`)
+  document.write(`년도:${now.getYear()}<br>`)//1900년도 기준
+  document.write(`년도:${now.getFullYear()}<br>`)
+  document.write(`월(0~11):${now.getMonth()+1}<br>`)
+  document.write(`일:${now.getDate()}<br>`)
+  document.write(`요일(0:일~6:토):${now.getDay()}<br>`)
+  document.write(`시간:${now.getHours()}<br>`)
+  document.write(`분:${now.getMinutes()}<br>`)
+  document.write(`초:${now.getSeconds()}<br>`)
+  //연 월의 마지막 일 getDate 요일 getDay
+   document.write(`마지막 날:${new Date(2023,3,0).getDate()}<br>`)
+  //1970냔 이후부터 now까지
+  document.write(`밀리초:${now.getTime()}<br>`)
+</script>
+</body>
+</html>

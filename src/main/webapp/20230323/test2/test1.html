@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!-- innerHTML이용 -->
+<html>
+<head>
+<meta charset="UTF-8">
+<title>구구단출력하기</title>
+<style type="text/css">
+ table { width:100%; border-collapse: collapse;}
+ th,td {border : 3px solid #bcbcbc; text-align: center; padding: 8px;}
+ th {background-color: #e2e2e2; color:#111111;}
+ td {background-color: #f2f2f2;}
+ caption {color:#111111; font-size: 20px; background-color: #ffffff;}
+</style>
+
+</head>
+<body>
+<input type="button" value="세로출력" onclick="print1()">
+<input type="button" value="가로출력" onclick="print2()">
+<input type="button" value="2단출력" onclick="print3()">
+<div id="gugudan">
+
+</div>
+<script type="text/javascript">
+  
+  function print1() {
+	let str ="";
+	str+='<table>';
+	str+='<tr>'
+	for(i=2;i<=9;i++){
+	 str+='<th>'+i+'단'
+	}
+	str+='</tr>'
+	for(i=1;i<=9;i++){
+		str+='<tr>'
+		for(j=2;j<=9;j++){
+			str+="<td>"+j+"x"+i+"="+(j*i)
+		}
+	}
+	document.querySelector("#gugudan").innerHTML = str;//id가 gugudan인 값을 찾아서
+}
+  function print2() {
+	let str ="";
+	str+='<table>';
+	for(i=2;i<=9;i++){
+		str+='<tr>'
+		str+='<th>'+i+"단</th>"
+		for(j=1;j<=9;j++){
+			str+='<tr>'
+			str+='<td>'+i+"x"+j+"="+(i*j)+"</td>"
+			str+='</tr>'
+		}
+		str+='</tr>'
+	}
+	document.getElementById("gugudan").innerHTML = str;
+  }
+  function print3() {
+	  let str ="";
+		str+='<table>';
+		str+='<tr>'
+		for(i=2;i<=9;i++){
+			str+='<th>'+i+'단'
+		}
+		str+='</tr>'
+		
+		for(i=1;i<=9;i++){
+			str+='<tr>'
+			for(j=2;j<=9;j++){
+				str+="<td>"+j+"x"+i+"="+(j*i)	
+			}
+		}
+		document.getElementById("gugudan").innerHTML = str;
+  }
+</script>
+</body>
+</html>

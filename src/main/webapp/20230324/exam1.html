@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>달력 출력하기</title>
+<style type="text/css">
+  table {width:100%; border-collspace:collapse;}
+  th,td {border : 3px solid #bcbcbc; text-align: center; padding:8px;}
+  th {background-color:#e2e2e2; color:#111111;}
+  td {background-color:#f2f2f2;}
+  caption { color:#111111; font-size:20px; background-color: #ffffff;}
+  .text-red {color:red;}
+  .text-blue {color:blue;}
+</style>
+</head>
+<body>
+<select id="y">
+  <option>2020</option><option>2021</option><option>2022</option>
+  <option>2023</option><option>2024</option>
+</select>
+<select id="m">
+  <option value="1">1월</option><option value="2">2월</option>
+  <option value="3">3월</option><option value="4">4월</option>
+  <option value="5">5월</option><option value="6">6월</option>
+  <option value="7">7월</option><option value="8">8월</option>
+  <option value="9">9월</option><option value="10">10월</option>
+  <option value="11">11월</option><option value="12">12월</option>
+</select>
+<input type="button" value="달력보기" onclick="show_cal()"><br>
+<span id="cal"></span>
+<script type="text/javascript">
+  function show_cal(){
+	  ye=y.value
+	  mo = m.value
+	  let str = ""
+	  str+="<table><caption>"+ye+"년"+mo+"월</caption>"
+	  str+="<tr><th class='text-red'>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th class='text-blue'>토</th></tr>"
+	  fi = new Date(ye,mo-1,1).getDay() // 다음월 1일
+	  la = new Date(ye,mo,0)
+	  k=1
+	  while(true){
+		  str+="<tr>"
+		  for(j=0;j<=6;j++){
+			  if(k<2&&j<fi||k>la.getDate()){
+				str+="<td> </td>"  
+			  }else if(j==0){
+				  str+="<td class='text-red'>"+k+"</td>"
+				  k++
+				  }else if(j==6){
+					  str+="<td class='text-blue'>"+k+"</td>"
+					  k++  
+				  }else{
+					  str+="<td>"+k+"</td>"
+					  k++
+				  }
+			  }
+		  str+="</tr>"
+		  if(k>la.getDate()){
+			  break;
+		  }
+	  }
+	  cal.innerHTML=str
+  }
+</script>
+</body>
+</html>

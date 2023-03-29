@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>class 이용</title>
+</head>
+<body>
+<script type="text/javascript">
+  class Animal{
+	  constructor(name){
+		this.name = name
+		this.cry = function(){}
+	  }
+  }
+  class Dog extends Animal{
+	  constructor(name){
+		  super(name)
+		  this.cry = function(){document.write(this.name+":멍멍<br>")}
+	  }
+  }
+  class Cat extends Animal{
+	  constructor(name){
+		  super(name)
+		  this.cry = function(){document.write(this.name+":야옹<br>")}
+	  }
+  }
+</script>
+</body>
+</html>
