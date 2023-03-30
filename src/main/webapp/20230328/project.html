@@ -52,10 +52,17 @@ input[type=button]{
   let timer=9;
   var btn;
   function start(){
-	 $("img").remove("#ab");// img id 같으면 삭제되는 지 확인
+	 while(true){
+		 var ab = document.querySelector("#ab");
+		 if(ab==null){break;}
+	 	 ab.remove(ab);
+	 }
 	 timer=9;
+	 cnt=0;
+	 score.innerHTML='0점';
 	 btn = document.getElementById('btn');
 	 btn.disabled = 'disabled';
+	 btn.value='다시시작';
 	 cm = setInterval(createMode, 800);
 	 ti = setInterval(Timer,1000);  
 }
@@ -77,30 +84,25 @@ input[type=button]{
 			  return;
 		  }
 		  box.remove();
-		  score.innerHTML=++cnt
+		  score.innerHTML=++cnt + "점";
 	  }
 	  document.body.appendChild(this.body);
   }
   function createMode(){
-	  function getRandSec(){
-		  return Math.ceil(Math.random()*800);
-		 }
-	  var sec = getRandSec();
-	  console.log(sec);
+	  var sec = Math.ceil(Math.random()*800);
 	   setTimeout(function(){
 		   pobox.push(new popupbox())
-	   }, getRandSec());
+	   }, sec);
+
   }
   function Timer(){
-	  console.log(timer);
 	  timer2.innerHTML=timer+"초";
-	  if(timer<=0){
+	  if(timer<0){
 		  clearInterval(cm);
 		  clearInterval(ti);
 		  alert("총점수:"+cnt)
 		  btn = document.getElementById('btn');
 		  btn.disabled = false;
-		  btn.value='다시시작';
 	  }
 	  timer--;
   }
@@ -109,7 +111,7 @@ input[type=button]{
 <body>
 <div id="main"></div>
 <div id="timer1">남은시간 :<div id="timer2">10초</div></div>
-<div id="scorearea">점수:<div id="score"></div></div>
+<div id="scorearea">점수:<div id="score">0점</div></div>
 <input type ='button' value="게임시작" id= "btn" onclick="start()">
 </body>
 </html>
