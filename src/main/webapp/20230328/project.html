@@ -10,8 +10,8 @@ div {position: absolute;}
 	border: 1px solid black;	overflow: hidden;
 }
 #scorearea {
-	position: absolute;	top: 410px;
-	left: 245px;   	
+	position: absolute;	top: 420px;
+	left: 250px;   	
 	border : 1px solid #333333;
 	width : 180px; height:20px;
 	padding-left:5px;
@@ -21,8 +21,8 @@ div {position: absolute;}
 	display: inline;	
 }
 #timer1 {
-	position: absolute;	top: 410px;
-	left: 25px; 
+	position: absolute;	top: 420px;
+	left: 30px; 
 	border : 1px solid #333333;
 	width : 180px; height:20px;
 	padding-left:5px;
@@ -31,6 +31,12 @@ div {position: absolute;}
 	position: relative;	left: 30px;   
 	display: inline;	
 }
+input[type=button]{
+	position: absolute;	top: 450px;
+	left: 190px; 
+	border : 2px solid #333333;
+	width : 80px; height:30px;
+	padding-left:5px; }
 </style>
 <script type="text/javascript">
   function nextRandomInteger(num){
@@ -38,57 +44,72 @@ div {position: absolute;}
 	  num1 = parseInt(num1);
 	  return num1;
   }
-  window.onload=function() {
-		 cm = setInterval(createMode, nextRandomInteger(2000));
-		 ti = setInterval(Timer,1000);
-	 }
   let pobox = [];
   let canWidth=400;
   let canHeight=350;
   let boxWid=35;
   let cnt=0;
-  let timer=30;
+  let timer=9;
+  var btn;
+  function start(){
+	 $("img").remove("#ab");
+	 timer=9;
+	 btn = document.getElementById('btn');
+	 btn.disabled = 'disabled';
+	 cm = setInterval(createMode, 800);
+	 ti = setInterval(Timer,1000);  
+}
   function popupbox(){
-	  this.body = document.createElement("div")
-	  this.wx = nextRandomInteger(boxWid)+15;
-	  this.x = nextRandomInteger(canWidth);
-	  this.y = nextRandomInteger(canHeight);
+	  let rnum = nextRandomInteger(boxWid)+15
+	  this.body = document.createElement("img")
+	  this.body.id="ab"
+	  this.body.src="nums/mole.png"
+	  this.body.setAttribute("width",rnum);
+	  this.body.setAttribute("height",rnum);
+	  this.x = nextRandomInteger(canWidth)+10;
+	  this.y = nextRandomInteger(canHeight)+10;
 	  this.body.style.position="absolute";
-	  this.body.setAttribute("style","background-color:black");
-	  this.body.style.left = this.x + 'px';
-	  this.body.style.top = this.y + 'px';
-	  this.body.style.width = this.wx +'px';
-	  this.body.style.height = this.wx+'px';
+	  this.body.style.left = this.x+'px';
+	  this.body.style.top = this.y+'px';
 	  let box = this.body;
 	  this.body.onclick = function(){ 
+		  if(timer<0){
+			  return;
+		  }
 		  box.remove();
 		  score.innerHTML=++cnt
-		  if(timer<19){
-			  return
-		  }
 	  }
 	  document.body.appendChild(this.body);
   }
   function createMode(){
-	  pobox.push(new popupbox())
+	  function getRandSec(){
+		  return Math.ceil(Math.random()*800);
+		 }
+	  var sec = getRandSec();
+	  console.log(sec);
+	   setTimeout(function(){
+		   pobox.push(new popupbox())
+	   }, getRandSec());
   }
   function Timer(){
-	  timer2.innerHTML=timer--+"초";
-	  if(timer<19){
+	  console.log(timer);
+	  timer2.innerHTML=timer+"초";
+	  if(timer<=0){
 		  clearInterval(cm);
 		  clearInterval(ti);
-		  alert("총 점수:"+cnt+"점")
+		  alert("총점수:"+cnt)
+		  btn = document.getElementById('btn');
+		  btn.disabled = false;
+		  btn.value='다시시작';
 	  }
+	  timer--;
   }
-  
-  
 </script>
 </head>
 <body>
 <div id="main"></div>
-<div style="width: 400px">
-<div id="timer1">남은시간 :<div id="timer2"></div></div>
+<div id="timer1">남은시간 :<div id="timer2">10초</div></div>
 <div id="scorearea">점수:<div id="score"></div></div>
-	</div>
+<input type ='button' value="게임시작" id= "btn" onclick="start()">
 </body>
 </html>
